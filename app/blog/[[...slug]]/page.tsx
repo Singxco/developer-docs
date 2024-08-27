@@ -1,7 +1,7 @@
 import DocsBreadcrumb from "@/components/docs-breadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
-import { page_routes } from "@/lib/routes-config";
+import { page_routes } from "@/lib/blog-routes-config";
 import { notFound } from "next/navigation";
 import { getMarkdownForSlug } from "@/lib/markdown";
 import { PropsWithChildren, cache } from "react";
@@ -12,15 +12,15 @@ type PageProps = {
 
 const cachedGetMarkdownForSlug = cache(getMarkdownForSlug);
 
-export default async function DocsPage({ params: { slug = [] } }: PageProps) {
+export default async function BlogPage({ params: { slug = [] } }: PageProps) {
   const pathName = slug.join("/");
-  const res = await cachedGetMarkdownForSlug("docs", pathName);
+  const res = await cachedGetMarkdownForSlug("blog", pathName);
 
   if (!res) notFound();
   return (
     <div className="flex items-start gap-12">
       <div className="flex-[3] pt-10">
-        <DocsBreadcrumb paths={slug} category="docs" />
+        <DocsBreadcrumb paths={slug} category="blog" />
         <Markdown>
           <h1>{res.frontmatter.title}</h1>
           <p className="-mt-4 text-muted-foreground text-[16.5px]">
@@ -30,7 +30,7 @@ export default async function DocsPage({ params: { slug = [] } }: PageProps) {
           <Pagination pathname={pathName} />
         </Markdown>
       </div>
-      <Toc path={pathName} category="docs" />
+      <Toc path={pathName} category="blog" />
     </div>
   );
 }
@@ -45,11 +45,11 @@ function Markdown({ children }: PropsWithChildren) {
 
 export async function generateMetadata({ params: { slug = [] } }: PageProps) {
   const pathName = slug.join("/");
-  const res = await cachedGetMarkdownForSlug("docs", pathName);
+  const res = await cachedGetMarkdownForSlug("blog", pathName);
   if (!res) return null;
   const { frontmatter } = res;
   return {
-    title: frontmatter.title + " - SingX Developer Portal",
+    title: frontmatter.title + " - SingX Developer Blog",
     description: frontmatter.description,
   };
 }

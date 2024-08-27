@@ -165,3 +165,7 @@ pre>code {
 .highlight-comp>code {
   background-color: transparent !important;
 }
+
+.prose65{
+  max-width: 65vw !important;
+}

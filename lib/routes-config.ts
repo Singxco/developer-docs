@@ -49,16 +49,6 @@ export const ROUTES: EachRoute[] = [
     ],
   },
   {
-    title: "Server Actions",
-    href: "/server-actions",
-    noLink: true,
-    items: [
-      { title: "getSession", href: "/getSession" },
-      { title: "getToken", href: "/getToken" },
-      { title: "getRole", href: "/getRole" },
-    ],
-  },
-  {
     title: "React Hooks",
     href: "/react-hooks",
     noLink: true,

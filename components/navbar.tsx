@@ -6,6 +6,7 @@ import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
 import { page_routes } from "@/lib/routes-config";
+import { page_routes as blogPageRoutes } from "@/lib/blog-routes-config";
 import { SheetClose } from "@/components/ui/sheet";
 
 export const NAVLINKS = [
@@ -14,20 +15,8 @@ export const NAVLINKS = [
     href: `/docs${page_routes[0].href}`,
   },
   {
-    title: "Examples",
-    href: "#",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "#",
-  },
-  {
     title: "Blog",
-    href: "#",
+    href: `/blog${blogPageRoutes[0].href}`,
   },
 ];
 
@@ -79,7 +68,7 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
       <HexagonIcon className="w-7 h-7 text-muted-foreground fill-current" />
-      <h2 className="text-md font-bold">template/docs</h2>
+      <h2 className="text-md font-bold">SingX - Developer portal</h2>
     </Link>
   );
 }

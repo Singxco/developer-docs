@@ -32,9 +32,9 @@ const components = {
   StepperItem,
 };
 
-export async function getMarkdownForSlug(slug: string) {
+export async function getMarkdownForSlug(dir: string, slug: string) {
   try {
-    const contentPath = getContentPath(slug);
+    const contentPath = getContentPath(dir, slug);
     const rawMdx = await fs.readFile(contentPath, "utf-8");
     return await compileMDX<MdxFrontmatter>({
       source: rawMdx,
@@ -59,8 +59,8 @@ export async function getMarkdownForSlug(slug: string) {
   }
 }
 
-export async function getTocs(slug: string) {
-  const contentPath = getContentPath(slug);
+export async function getTocs(dir: string, slug: string) {
+  const contentPath = getContentPath(dir, slug);
   const rawMdx = await fs.readFile(contentPath, "utf-8");
   // captures between ## - #### can modify accordingly
   const headingsRegex = /^(#{2,4})\s(.+)$/gm;
@@ -92,8 +92,8 @@ function sluggify(text: string) {
   return slug.replace(/[^a-z0-9-]/g, "");
 }
 
-function getContentPath(slug: string) {
-  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+function getContentPath(dir: string, slug: string) {
+  return path.join(process.cwd(), "/contents/", dir, `/${slug}/index.mdx`);
 }
 
 // for copying the code

@@ -1,0 +1,350 @@
+---
+title: Versioned API Changes 2023
+description:
+---
+
+## FX APIs 
+
+#### Corridors API
+
+| Type | API | Details |
+|----|----|----|
+| Addition | GET /exchange/v2/corridors | See reference #1 |
+| Deprecated | GET /exchange/corridors | Sample Response <br/> ```{ “SGD”: [“USD“,”INR”], “USD“:[“USD”,”HKD”]}``` |
+
+
+
+```
+What has changed:
+
+* The response is grouped at multiple levels for easy and fast understanding.
+  * corridors
+    * From Currency
+      * To Currency
+        * Array of supported payment types
+
+```
+
+
+Reference #1
+
+```json
+{
+    "corridors": {
+      "HKD": {            // From currency
+          "USD": [        // To Currency
+            "LOCAL_BANK", // Supported Payment Types
+            "SWIFT"
+          ]
+       },
+      "SGD": {            // From currency
+          "INR": [        // To Currency
+            "LOCAL_BANK" // Supported Payment Types
+          ],
+          "USD": [        // To Currency
+            "LOCAL_BANK", // Supported Payment Types
+            "SWIFT"
+          ]
+       },
+       ...
+    },
+     "paymentTypes": {
+        "SWIFT": "Swift OUR Payments",
+        "LOCAL_BANK": "Local Bank Payments",
+        "CASH": "Cash"
+         ...
+     }
+}
+```
+
+
+#### Exchange API
+
+| Type | API | Details |
+|----|----|----|
+| Addition | POST /exchange/v3 | Sample Payload ```{ "fromCurrency": "SGD", "toCurrency": "AUD", "amount": 1000.00, "type": "Send", "paymentType": "SWIFT_SHA" }``` |
+| Deprecated | POST /exchange/v2 | Sample Payload <br/> ```{ "fromCurrency": "SGD", "toCurrency": "USD", "amount": 100.00, "type": "Send", "swift": true, "cash": false, "txnFeeType": "OUR" }``` |
+
+
+
+```
+What has changed:
+
+* Removed keys “swift”, “cash”, “txnFeeType”
+* Added keys “paymentType”
+  * *List Available in Appendix below*
+
+```
+
+## Receiver APIs
+
+#### Countries
+
+| Type | API | Details |
+|----|----|----|
+| Addition | GET /receivers/mass/v2/add/countries | Reference #2 |
+| Deprecated | GET /receivers/mass/v1/add/countries |    |
+
+
+
+```
+What has changed:
+
+* Countries list now provide a lot more information which reduces multiple API calls.
+* Information grouped for easy and fast understanding.
+  * Currency
+    * Payment Types supported by each currency.
+      * Receiver Type supported by each currency and Payment Type.
+      * Countries to which the Currency and Payment type is supported.
+
+```
+
+
+Reference #2
+
+```json
+{
+  "USD": {                                          // Supported currency
+        "currency": "US Dollar",
+        "paymentTypes": {                          // Supported Payment Type(s)
+            "LOCAL_BANK": {                        // Supported Receiver Type(s)/Payment Type
+                "receiverType": [
+                    "Individual",
+                    "Business"
+                ],
+                "countries": [                      // Countries supported
+                    "United States of America"
+                ],
+                "label": "Local Bank Payments"
+            },
+            "SWIFT": {
+                "receiverType": [
+                    "Individual",
+                    "Business"
+                ],
+                "countries": [                      // Countries supported
+                    "Albania",
+                    ....
+                 ],
+                "label": "Swift Payments"
+            }
+        }
+    },
+    "MMK": {
+        "currency": "Myanmar Kyat",
+        "paymentTypes": {                         // Supported Payment Type(s)
+            "LOCAL_BANK": {                       // Supported Receiver Type(s)/Payment Type
+                "receiverType": [
+                    "Individual"
+                ],
+                "countries": [
+                    "Myanmar"
+                ],
+                "label": "Local Bank Payments"
+            },
+            "CASH": {
+                "receiverType": [
+                    "Individual"
+                ],
+                "countries": [                      // Countries supported
+                    "Myanmar"
+                ],
+                "label": "Cash"
+            }
+        }
+    },
+    ...
+}
+```
+
+
+#### Fields
+
+| Type | API | Details |
+|----|----|----|
+| Addition | GET /receivers/mass/v2/add/fields/:Currency/:PaymentType/:ReceiverType/:Country | Reference #3 |
+| Deprecated | GET /receivers/mass/v1/add/:Country/fields/:Currency |    |
+
+
+
+```
+What has changed:
+
+* Structure of url will not require PaymentType and ReceiverType
+* The response will additionally have paymentType field
+* “type” will always be the receiverType requested. Originally can also contain “Any”.
+
+```
+
+
+Reference #3
+
+```json
+Sample Request
+/receivers/mass/v2/add/fields/INR/LOCAL_BANK/Business/India
+
+Response
+[
+  {
+        "field": "receiverCompanyName",
+        "currency": "INR",
+        "paymentType": "LOCAL_BANK",
+        "type": "Business",
+        "visible": true,
+        "required": true ,              // Mandatory Field
+        "label": "Company Name",        // Field Label
+        "condition": "",
+        "sortOrder": 120,
+        "fieldType": "string",          // Type of field
+        "groupId": 2,
+        "groupName": "Receiver Details"
+    },
+    ...
+]
+```
+
+
+#### Add Receiver
+
+| Type | API | Details |
+|----|----|----|
+| Addition | POST /receivers/mass/v2/add/ | Reference #4 |
+| Deprecated | POST /receivers/mass/v1/add/ |    |
+
+
+
+```
+What has changed:
+
+* field key “countryId” → “country“
+* “paymentType” field has been introduced.
+
+```
+
+
+Reference #4
+
+```json
+// INR India Individual Sample (Reference only, Please use GET fields API to get list of fields)
+{
+    "country": "India",
+    "currency": "INR",
+    "paymentType": "LOCAL_BANK",
+    "receiverType": "Individual",
+    "email": "help@singx.co",
+    "receiverFirstName": "Pradeep",
+    "senderRelationship": "Self",
+    "receiverLastName": "K",
+    "senderId": "XXXXXXX",
+    "accountNumber": "123456XXXX",
+    "address": "Address",
+    "ifsc": "HDFC000XXXX",
+    "receiverId": "XXXXXXX-1",
+    "accountType": "SAVINGS"
+}
+```
+
+
+## Transaction
+
+#### All Transactions
+
+| Type | API | Details |
+|----|----|----|
+| Addition | GET /transactions/mass/v2/ |    |
+| Deprecated | GET /transactions/mass/v1/ |    |
+
+
+
+```
+What has changed:
+
+* A few keys are changed under each transaction detail.
+* “status” will introduce new statuses. (Refer Appendix below)
+
+```
+
+
+#### Details
+
+| Type | API | Details |
+|----|----|----|
+| Addition | GET /transactions/mass/v2/:transactionID |    |
+| Deprecated | GET /transactions/mass/v1/:transactionID |    |
+
+
+
+```
+What has changed:
+
+* “status” will introduce new statuses. (Refer Appendix below)
+
+```
+
+
+#### Create
+
+| Type | API | Details |
+|----|----|----|
+| Addition | POST /transactions/mass/v2/create | Reference #5 |
+| Deprecated | POST /transactions/mass/v1/createTransaction/ |    |
+
+
+
+```
+What has changed:
+
+* “txnFeeType” - Removed
+* “paymentType“ - Added
+* Key change from “quoteId” → “quote”
+
+```
+
+
+Reference #5
+
+```json
+//Sample Request
+{
+    "senderId": "sender-id",
+    "transactionId": "transaction-id",
+    "receiverId": "receiver-id",
+    "sendCurrency": "SGD",
+    "type": "Send",
+    "receiveCurrency": "INR",
+    "amount": 10,
+    "purposeCode": "purpose-code",
+    "comments": "remarks / comments",
+    "quote": "quote",
+    "paymentType": "LOCAL_BANK",
+}
+```
+
+
+
+---
+
+## Appendix
+
+#### Payment Types
+
+| Type | Details |
+|----|----|
+| LOCAL_BANK | Local Bank Payments |
+| SWIFT | Swift Payment - Fee Type OUR |
+| SWIFT_SHA | Swift Payment - Fee Type SHA |
+| CASH | Cash Payments |
+
+
+#### Transaction Status
+
+| Status | Details |
+|----|----|
+| Transfer Initiated | The initial status once transfer is created |
+| Validity Expired | When a transaction is in Transfer Initiated status (Not enough balance) for X amount of time, the status will be change to validity expired after time period X. If required the transaction can be reinitiated with the new FX rate applied |
+| Processing Payment | Payment is being processed |
+| Payment Successful | Funds transferred successfully to the beneficiary |
+| Payment Failed | Failure to process payment |
+| Cancelled | Cancelled |
+
+
