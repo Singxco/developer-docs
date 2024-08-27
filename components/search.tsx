@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { page_routes } from "@/lib/routes-config";
+import { page_routes as blog_page_routes } from "@/lib/blog-routes-config";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useMemo, useState } from "react";
 import Anchor from "./anchor";
@@ -36,6 +37,14 @@ export default function Search() {
   const filteredResults = useMemo(
     () =>
       page_routes.filter((item) =>
+        item.title.toLowerCase().includes(searchedInput.toLowerCase())
+      ),
+    [searchedInput]
+  );
+
+  const filteredBlogResults = useMemo(
+    () =>
+      blog_page_routes.filter((item) =>
         item.title.toLowerCase().includes(searchedInput.toLowerCase())
       ),
     [searchedInput]
@@ -75,12 +84,14 @@ export default function Search() {
               className="h-14 px-4 bg-transparent border-b text-[15px] outline-none"
             />
           </DialogHeader>
-          {filteredResults.length == 0 && searchedInput && (
-            <p className="text-muted-foreground mx-auto mt-2 text-sm">
-              No results found for{" "}
-              <span className="text-primary">{`"${searchedInput}"`}</span>
-            </p>
-          )}
+          {filteredResults.length == 0 &&
+            filteredBlogResults.length == 0 &&
+            searchedInput && (
+              <p className="text-muted-foreground mx-auto mt-2 text-sm">
+                No results found for{" "}
+                <span className="text-primary">{`"${searchedInput}"`}</span>
+              </p>
+            )}
           <ScrollArea className="max-h-[350px]">
             <div className="flex flex-col items-start overflow-y-auto sm:px-3 px-1 pb-4 gap-0.5">
               {filteredResults.map((item) => (
@@ -88,6 +99,18 @@ export default function Search() {
                   <Anchor
                     className="dark:hover:bg-neutral-900 hover:bg-neutral-100 w-full p-2.5 px-3 rounded-sm text-[15px] flex items-center gap-2.5"
                     href={`/docs${item.href}`}
+                    activeClassName="dark:bg-neutral-900 bg-neutral-100"
+                  >
+                    <FileTextIcon className="h-[1.1rem] w-[1.1rem]" />{" "}
+                    {item.title}
+                  </Anchor>
+                </DialogClose>
+              ))}
+              {filteredBlogResults.map((item) => (
+                <DialogClose key={item.href} asChild>
+                  <Anchor
+                    className="dark:hover:bg-neutral-900 hover:bg-neutral-100 w-full p-2.5 px-3 rounded-sm text-[15px] flex items-center gap-2.5"
+                    href={`/blog${item.href}`}
                     activeClassName="dark:bg-neutral-900 bg-neutral-100"
                   >
                     <FileTextIcon className="h-[1.1rem] w-[1.1rem]" />{" "}
