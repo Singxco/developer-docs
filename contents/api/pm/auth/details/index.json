@@ -1,0 +1,100 @@
+{
+    "name": "Details",
+    "request": {
+        "method": "GET",
+        "header": [
+            {
+                "key": "X-API-Key",
+                "value": "{{api-key}}"
+            }
+        ],
+        "urlObject": {
+            "path": [
+                "auth",
+                "details"
+            ],
+            "query": [],
+            "variable": []
+        }
+    },
+    "response": [
+        {
+            "name": "Default",
+            "originalRequest": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": "{\n    \"firstName\": \"ABC\",\n    \"lastName\": \"Remit\",\n    \"ci\": false,\n    \"roles\": [\n        \"ROLE_MP_ADMIN\"\n    ],\n    \"fullName\": \"ABC Remit\",\n    \"makerChecker\": false,\n    \"type\": \"SME\",\n    \"category\": \"PM\",\n    \"login\": {\n        \"fullName\": \"API 210024\"\n    },\n    \"subSenders\": [\n        {\n            \"firstName\": \"ABC\",\n            \"lastName\": \"Remit\",\n            \"fullName\": \"ABC Remit\",\n            \"id\": \"210024000000\"\n        },\n        {\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"fullName\": \"John Doe\",\n            \"id\": \"SENDER12\"\n        }\n    ]\n}"
+            },
+            "status": "OK",
+            "code": 200,
+            "header": [
+                {
+                    "key": "Date",
+                    "value": "Thu, 01 Dec 2022 02:22:14 GMT"
+                },
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Content-Length",
+                    "value": "385"
+                },
+                {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                },
+                {
+                    "key": "Server",
+                    "value": "nginx/1.14.1"
+                },
+                {
+                    "key": "Vary",
+                    "value": "Origin"
+                },
+                {
+                    "key": "Vary",
+                    "value": "Access-Control-Request-Method"
+                },
+                {
+                    "key": "Vary",
+                    "value": "Access-Control-Request-Headers"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-XSS-Protection",
+                    "value": "1; mode=block"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "no-cache, no-store, max-age=0, must-revalidate"
+                },
+                {
+                    "key": "Pragma",
+                    "value": "no-cache"
+                },
+                {
+                    "key": "Expires",
+                    "value": "0"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                }
+            ],
+            "body": "{\n    \"firstName\": \"ABC\",\n    \"lastName\": \"Remit\",\n    \"ci\": false,\n    \"roles\": [\n        \"ROLE_MP_ADMIN\"\n    ],\n    \"fullName\": \"ABC Remit\",\n    \"makerChecker\": false,\n    \"type\": \"SME\",\n    \"category\": \"PM\",\n    \"login\": {\n        \"fullName\": \"API 210024\"\n    },\n    \"subSenders\": [\n        {\n            \"firstName\": \"ABC\",\n            \"lastName\": \"Remit\",\n            \"fullName\": \"ABC Remit\",\n            \"id\": \"210024000000\"\n        },\n        {\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"fullName\": \"John Doe\",\n            \"id\": \"SENDER12\"\n        }\n    ]\n}"
+        }
+    ]
+}

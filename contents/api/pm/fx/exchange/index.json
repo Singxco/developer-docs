@@ -1,0 +1,79 @@
+{
+    "name": "Exchange",
+    "request": {
+        "method": "GET",
+        "header": [
+            {
+                "key": "X-API-Key",
+                "value": "{{api-key}}"
+            }
+        ],
+        "urlObject": {
+            "path": [
+                "exchange",
+                "v3",
+                ""
+            ],
+            "query": [],
+            "variable": []
+        }
+    },
+    "response": [
+        {
+            "id": 1,
+            "name": "SGD-INR Fixed Send amount",
+            "originalRequest": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": "{\r\n    \"fromCurrency\": \"SGD\",\r\n    \"toCurrency\": \"INR\",\r\n    \"type\": \"Send\",\r\n    \"amount\": 10,\r\n    \"txnFeeType\": \"OUR\",\r\n    \"productType\": \"Remittance\",\r\n    \"cashPickup\": false,\r\n    \"swift\": false\r\n}"
+            }
+        },
+        {
+            "id": 2,
+            "name": "SGD-USD Swift Fixed receiver amount",
+            "originalRequest": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": "{\r\n  \"fromCurrency\": \"SGD\",\r\n  \"toCurrency\": \"USD\",\r\n  \"type\": \"Receive\",\r\n  \"amount\": 10,\r\n  \"txnFeeType\": \"OUR\",\r\n  \"productType\": \"Remittance\",\r\n  \"cashPickup\": false,\r\n  \"swift\": true\r\n}"
+            }
+        },
+        {
+            "id": 3,
+            "name": "SGD-EUR Swift Fixed receiver amount - SHA fee",
+            "originalRequest": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": "{\r\n  \"fromCurrency\": \"SGD\",\r\n  \"toCurrency\": \"EUR\",\r\n  \"type\": \"Receive\",\r\n  \"amount\": 10,\r\n  \"txnFeeType\": \"SHA\",\r\n  \"productType\": \"Remittance\",\r\n  \"cashPickup\": false,\r\n  \"swift\": true\r\n}"
+            }
+        }
+    ]
+}

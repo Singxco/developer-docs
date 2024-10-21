@@ -1,0 +1,61 @@
+{
+    "name": "History",
+    "request": {
+        "method": "GET",
+        "header": [
+            {
+                "key": "X-API-Key",
+                "value": "{{api-key}}"
+            }
+        ],
+        "urlObject": {
+            "path": [
+                "partner",
+                "balance",
+                "history"
+            ],
+            "query": [
+                {
+                    "key": "page",
+                    "value": "0"
+                },
+                {
+                    "key": "size",
+                    "value": "10"
+                },
+                {
+                    "key": "filter",
+                    "value": "createdDate GT '2024-08-08 00:00:00';createdDate LT '2024-09-07 23:59:59';currency EQ 'SGD'"
+                }
+            ],
+            "variable": []
+        }
+    },
+    "response": [
+        {
+            "name": "Default",
+            "originalRequest": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            },
+            "status": "OK",
+            "code": 200,
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": "{\n    \"content\": [\n        {\n            \"createdDate\": \"2024-08-18 16:58\",\n            \"description\": \"Credit - Bank\",\n            \"transactionType\": \"Credit\",\n            \"balance\": 100,\n            \"afterBalance\": 100,\n            \"historyName\": \"\",\n            \"currency\": \"SGD\",\n            \"status\": \"Credited\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"unsorted\": false,\n            \"sorted\": true,\n            \"empty\": false\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 1,\n    \"size\": 10,\n    \"number\": 0,\n    \"sort\": {\n        \"unsorted\": false,\n        \"sorted\": true,\n        \"empty\": false\n    },\n    \"first\": true,\n    \"numberOfElements\": 1,\n    \"empty\": false\n}"
+        }
+    ]
+}

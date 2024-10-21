@@ -15,9 +15,13 @@ export const NAVLINKS = [
     href: `/docs${page_routes[0].href}`,
   },
   {
-    title: "Blog",
-    href: `/blog${blogPageRoutes[0].href}`,
+    title: "API Reference",
+    href: `/api/pm/auth/details`,
   },
+  // {
+  //   title: "Blog",
+  //   href: `/blog${blogPageRoutes[0].href}`,
+  // },
 ];
 
 export function Navbar() {

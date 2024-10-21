@@ -1,0 +1,44 @@
+{
+    "name": "Corridors",
+    "request": {
+        "method": "GET",
+        "header": [
+            {
+                "key": "X-API-Key",
+                "value": "{{api-key}}"
+            }
+        ],
+        "urlObject": {
+            "path": [
+                "exchange",
+                "v2",
+                "corridors"
+            ],
+            "query": [],
+            "variable": []
+        }
+    },
+    "response": [
+        {
+            "id": 1,
+            "name": "Default",
+            "originalRequest": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": "{\r\n  \"fromCurrency\": \"SGD\",\r\n  \"toCurrency\": \"INR\",\r\n  \"type\": \"Send\",\r\n  \"amount\": 1,\r\n  \"txnFeeType\": \"OUR\",\r\n  \"productType\": \"Remittance\",\r\n  \"cashPickup\": false,\r\n  \"swift\": false\r\n}\r\n"
+            },
+            "body": "{\n    \"HKD\": [\n        \"HKD\",\n        \"EUR\",\n        \"USD\",\n        \"MYR\",\n        \"CAD\",\n        \"INR\",\n        \"VND\",\n        \"THB\",\n        \"CNY\",\n        \"AUD\",\n        \"SGD\",\n        \"KRW\",\n        \"JPY\",\n        \"LKR\",\n        \"BDT\",\n        \"GBP\",\n        \"IDR\",\n        \"NZD\",\n        \"PHP\"\n    ],\n    \"AUD\": [\n        \"HKD\",\n        \"EUR\",\n        \"USD\",\n        \"CAD\",\n        \"MYR\",\n        \"ZAR\",\n        \"INR\",\n        \"VND\",\n        \"THB\",\n        \"CNY\",\n        \"AUD\",\n        \"SGD\",\n        \"KRW\",\n        \"NPR\",\n        \"LKR\",\n        \"JPY\",\n        \"GBP\",\n        \"IDR\",\n        \"NZD\",\n        \"PHP\"\n    ],\n    \"SGD\": [\n        \"HKD\",\n        \"AED\",\n        \"EUR\",\n        \"USD\",\n        \"MYR\",\n        \"CAD\",\n        \"ZAR\",\n        \"INR\",\n        \"VND\",\n        \"THB\",\n        \"CNY\",\n        \"AUD\",\n        \"SGD\",\n        \"KRW\",\n        \"NPR\",\n        \"JPY\",\n        \"LKR\",\n        \"BDT\",\n        \"GBP\",\n        \"IDR\",\n        \"PKR\",\n        \"NZD\",\n        \"PHP\"\n    ],\n    \"GBP\": [\n        \"AUD\",\n        \"HKD\",\n        \"SGD\",\n        \"GBP\",\n        \"IDR\",\n        \"USD\",\n        \"MYR\",\n        \"NZD\",\n        \"INR\"\n    ],\n    \"IDR\": [\n        \"IDR\"\n    ],\n    \"MYR\": [\n        \"MYR\"\n    ],\n    \"USD\": [\n        \"HKD\",\n        \"EUR\",\n        \"MYR\",\n        \"USD\",\n        \"CAD\",\n        \"INR\",\n        \"VND\",\n        \"CNY\",\n        \"THB\",\n        \"AUD\",\n        \"SGD\",\n        \"KRW\",\n        \"NPR\",\n        \"JPY\",\n        \"LKR\",\n        \"BDT\",\n        \"GBP\",\n        \"IDR\",\n        \"PKR\",\n        \"NZD\",\n        \"PHP\"\n    ]\n}"
+        }
+    ]
+}

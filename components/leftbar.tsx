@@ -19,12 +19,23 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { DialogTitle } from "./ui/dialog";
+import { APIROUTES } from "@/lib/api-routes-config";
 
 export function Leftbar() {
   return (
     <aside className="md:flex hidden flex-[1] min-w-[230px] sticky top-16 flex-col h-[92.75vh] overflow-y-auto">
       <ScrollArea className="py-4">
         <Menu />
+      </ScrollArea>
+    </aside>
+  );
+}
+
+export function APILeftbar() {
+  return (
+    <aside className="md:flex hidden flex-[1] min-w-[230px] sticky top-16 flex-col h-[92.75vh] overflow-y-auto">
+      <ScrollArea className="py-4">
+        <APIMenu />
       </ScrollArea>
     </aside>
   );
@@ -58,6 +69,22 @@ export function SheetLeftbar() {
         </ScrollArea>
       </SheetContent>
     </Sheet>
+  );
+}
+
+function APIMenu({ isSheet = false }) {
+  return (
+    <div className="flex flex-col gap-3.5 mt-5">
+      {APIROUTES.map((item, index) => {
+        const modifiedItems = {
+          ...item,
+          href: `/api/pm${item.href}`,
+          level: 0,
+          isSheet,
+        };
+        return <SubLink key={item.title + index} {...modifiedItems} />;
+      })}
+    </div>
   );
 }
 
